@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+	<persistence-unit name="glandata"
+		transaction-type="RESOURCE_LOCAL">
+		<properties>
+			<!-- Driver do Banco de Dados -->
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<!-- path/nome BD -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/nf-hibernate" />
+			<!-- Usuário de acesso ao BD -->
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<!-- Senha de acesso ao BD -->
+			<property name="javax.persistence.jdbc.password"
+				value="123456" />
+
+			<!-- DB Dialect -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<!-- update / create / create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- Exibe o SQL no console -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- Formata o SQL no console -->
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
