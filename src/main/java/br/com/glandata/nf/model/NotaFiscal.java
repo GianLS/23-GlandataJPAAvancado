@@ -1,4 +1,4 @@
-package br.com.glandata.jpa.model;
+package br.com.glandata.nf.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +26,10 @@ public class NotaFiscal {
 	public NotaFiscal() {
 	}
 
+	public NotaFiscal(Long id) {
+		this.id = id;
+	}
+
 	public NotaFiscal(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -37,7 +42,7 @@ public class NotaFiscal {
 	@Getter
 	@Setter
 	@Column(name = "valor_total")
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 
 	@Getter
 	@Setter
@@ -46,16 +51,30 @@ public class NotaFiscal {
 
 	@Getter
 	@Setter
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Cliente cliente;
-	
+
 	@Getter
 	@Setter
 	@OneToMany(mappedBy = "notaFiscal", cascade = CascadeType.ALL)
 	private List<ItemNotaFiscal> itens = new ArrayList<>();
-	
+
 	public void adicionarItem(ItemNotaFiscal item) {
-		//item.setNotaFiscal(this);
 		itens.add(item);
+		atualizarValorNota(item.getPrecoUnitario(), item.getQuantidade());
+	}
+
+	private void atualizarValorNota(BigDecimal valor, Integer quantidade) {
+		this.setValorTotal(this.valorTotal.add(valor.multiply(new BigDecimal(quantidade))));
+	}
+
+	public void removerItem(ItemNotaFiscal item) {
+		itens.remove(item);
+		atualizarValorNota(item.getPrecoUnitario().negate(), item.getQuantidade());
+	}
+
+	public void calcularValorTotal() {
+		this.itens.forEach(i -> this
+				.setValorTotal(this.valorTotal.add(i.getPrecoUnitario().multiply(new BigDecimal(i.getQuantidade())))));
 	}
 }

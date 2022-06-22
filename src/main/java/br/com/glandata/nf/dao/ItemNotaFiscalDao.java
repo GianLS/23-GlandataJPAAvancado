@@ -1,10 +1,10 @@
-package br.com.glandata.jpa.dao;
+package br.com.glandata.nf.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.glandata.jpa.model.ItemNotaFiscal;
+import br.com.glandata.nf.model.ItemNotaFiscal;
 
 public class ItemNotaFiscalDao {
 
@@ -31,7 +31,7 @@ public class ItemNotaFiscalDao {
 		return em.find(ItemNotaFiscal.class, id);
 	}
 
-	public List<ItemNotaFiscal> listarTudo() {
+	public List<ItemNotaFiscal> buscarTodos() {
 		return em.createQuery("SELECT inf FROM ItemNotaFiscal inf", ItemNotaFiscal.class).getResultList();
 	}
 

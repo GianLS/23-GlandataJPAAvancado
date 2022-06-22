@@ -1,4 +1,4 @@
-package br.com.glandata.jpa.model;
+package br.com.glandata.nf.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,10 @@ import lombok.Setter;
 @Table(name = "categorias")
 public class Categoria {
 	public Categoria() {
+	}
+
+	public Categoria(Long id) {
+		this.id = id;
 	}
 
 	public Categoria(String nome) {

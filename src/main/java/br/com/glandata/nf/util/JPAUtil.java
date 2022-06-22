@@ -1,4 +1,4 @@
-package br.com.glandata.jpa.util;
+package br.com.glandata.nf.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

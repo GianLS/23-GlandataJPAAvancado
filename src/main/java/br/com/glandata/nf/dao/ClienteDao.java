@@ -1,10 +1,10 @@
-package br.com.glandata.jpa.dao;
+package br.com.glandata.nf.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.glandata.jpa.model.Cliente;
+import br.com.glandata.nf.model.Cliente;
 
 public class ClienteDao {
 
@@ -31,7 +31,7 @@ public class ClienteDao {
 		return em.find(Cliente.class, id);
 	}
 
-	public List<Cliente> listarTudo() {
+	public List<Cliente> buscarTodos() {
 		return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
 	}
 

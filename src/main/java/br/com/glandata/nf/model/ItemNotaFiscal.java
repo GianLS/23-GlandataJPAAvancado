@@ -1,9 +1,10 @@
-package br.com.glandata.jpa.model;
+package br.com.glandata.nf.model;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,10 @@ import lombok.Setter;
 @Table(name = "itens_nota_fiscal")
 public class ItemNotaFiscal {
 	public ItemNotaFiscal() {
+	}
+
+	public ItemNotaFiscal(Long id) {
+		this.id = id;
 	}
 
 	public ItemNotaFiscal(Integer quantidade, NotaFiscal notaFiscal, Produto produto) {
@@ -42,12 +47,12 @@ public class ItemNotaFiscal {
 
 	@Getter
 	@Setter
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private NotaFiscal notaFiscal;
 
 	@Getter
 	@Setter
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
 
 }
